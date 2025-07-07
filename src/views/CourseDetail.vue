@@ -124,7 +124,7 @@
             @click="checkout"
             class="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
           >
-          Beli Kelas - Rp 100.000
+            Beli Kelas - {{ course?.price ?? "-" }}
           </button>
         </div>
       </div>
@@ -160,6 +160,7 @@ export default {
         teacher: null,
         thumbnail: null,
         path_trailer: "",
+        price: "",
       },
       isEnrolled: false,
       hasPendingPayment: false,
@@ -201,14 +202,11 @@ export default {
       })
         .then((res) => res.json())
         .then(() => {
-          return fetch(
-            `http://elspace.test/api/enrollments/check/${this.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          return fetch(`http://elspace.test/api/enrollments/check/${this.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
         })
         .then((res) => res.json())
         .then((data) => {

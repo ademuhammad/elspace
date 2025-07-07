@@ -199,21 +199,18 @@ export default {
       .then((data) => {
         const defaultImage = "/images/k.jpg";
 
-        const baseURL = "http://elspace.test"; // Sesuaikan dengan URL Laravel kamu
-
-this.allCourses = data.courses.map((course) => {
-  return {
-    id: course.id,
-    title: course.name,
-    image: course.thumbnail ? baseURL + course.thumbnail : defaultImage,
-    desc: course.about?.slice(0, 100) + "...",
-    duration: course.duration || "N/A",
-    rating: course.rating || "4.8",
-    categorySlug: course.category?.slug || "",
-    subjectId: course.category?.subject?.id || null,
-  };
-});
-
+        this.allCourses = data.courses.map((course) => {
+          return {
+            id: course.id,
+            title: course.name,
+            image: course.thumbnail ? course.thumbnail : defaultImage,
+            desc: course.about?.slice(0, 100) + "...",
+            duration: course.duration || "N/A",
+            rating: course.rating || "4.8",
+            categorySlug: course.category?.slug || "",
+            subjectId: course.category?.subject?.id || null,
+          };
+        });
 
         this.categories = data.categories;
 
@@ -224,10 +221,14 @@ this.allCourses = data.courses.map((course) => {
           }
         });
         this.subjects = Array.from(subjectMap.values());
+      })
+      .catch((error) => {
+        console.error(error);
       });
   },
 };
 </script>
+
 
 <style scoped>
 body {

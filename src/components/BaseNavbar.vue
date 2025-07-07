@@ -27,14 +27,7 @@
             About
           </router-link>
         </li>
-        <li>
-          <router-link
-            to="/CourseDetail"
-            :class="navLinkClass('/CourseDetail')"
-          >
-            Details
-          </router-link>
-        </li>
+     
       </ul>
 
       <!-- Auth Buttons (Desktop) -->
